@@ -1,0 +1,31 @@
+# Personal Data (DO NOT COMMIT)
+###################################
+
+# Trade records and personal financial data
+trades/
+
+# Imported files and contract notes
+imports/
+
+# Generated reports with personal data
+reports/
+
+# Generated cache/temp files
+.DS_Store
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.coverage
+*.egg
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# YFinance ignore list (user-specific)
+.yfinance_ignore
