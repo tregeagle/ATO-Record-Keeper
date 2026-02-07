@@ -1,17 +1,17 @@
 .PHONY: help reports clean index all
 
 # Report output directory
-REPORTS_DIR := reports
+REPORTS_DIR := output
 HTML_DIR := $(REPORTS_DIR)/html
 MARKDOWN_DIR := $(REPORTS_DIR)/markdown
 
 # Tax years are dynamically detected from trade directories
 # This supports any year: trades/1066/, trades/2999/, trades/2025/, etc.
 # Python script discovers all year directories and generates reports for each
-TAX_YEARS := $(shell python3 -c "import os; dirs = [d for d in os.listdir('trades') if d[0].isdigit()]; print(' '.join(sorted(dirs)))" 2>/dev/null || echo "")
+TAX_YEARS := $(shell python3 -c "import os; dirs = [d for d in os.listdir('input') if d[0].isdigit()]; print(' '.join(sorted(dirs)))" 2>/dev/null || echo "")
 
 # Python scripts
-FIFO_CALC := trades/scripts/fifo_calculator.py
+FIFO_CALC := scripts/fifo_calculator.py
 
 help:
 	@echo "=== ATO Tax Reporting - Makefile ==="
@@ -132,8 +132,8 @@ $(HTML_DIR)/style.css: | $(HTML_DIR)
 # Generate index pages with CGT indicators and holdings values
 index: reports $(HTML_DIR)/style.css
 	@echo "Generating index pages with holdings values..."
-	@python3 trades/scripts/generate_index.py \
-		--trades-path trades \
+	@python3 scripts/generate_index.py \
+		--trades-path input \
 		--reports-path $(REPORTS_DIR) \
 		--markdown-dir $(MARKDOWN_DIR) \
 		--html-dir $(HTML_DIR)

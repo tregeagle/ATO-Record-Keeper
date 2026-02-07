@@ -2,13 +2,13 @@
 ###################################
 
 # Trade records and personal financial data
-trades/
+input/
 
 # Imported files and contract notes
 imports/
 
 # Generated reports with personal data
-reports/
+output/
 
 # Generated cache/temp files
 .DS_Store
@@ -26,6 +26,3 @@ __pycache__/
 *.swp
 *.swo
 *~
-
-# YFinance ignore list (user-specific)
-.yfinance_ignore
