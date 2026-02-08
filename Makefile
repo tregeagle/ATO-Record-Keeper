@@ -1,4 +1,4 @@
-.PHONY: help reports clean index all
+.PHONY: help reports clean index all archive setup
 
 # Report output directory
 REPORTS_DIR := output
@@ -17,9 +17,11 @@ help:
 	@echo "=== ATO Tax Reporting - Makefile ==="
 	@echo ""
 	@echo "Targets:"
+	@echo "  make setup        - Install dependencies (Python + pandoc check)"
 	@echo "  make reports      - Generate all tax reports (markdown + HTML)"
 	@echo "  make index        - Generate HTML index page"
 	@echo "  make all          - Generate reports and index"
+	@echo "  make archive      - Back up input/ and imports/ (keeps last 3)"
 	@echo "  make clean        - Remove all generated reports"
 	@echo ""
 	@echo "Report formats:"
@@ -161,6 +163,22 @@ clean:
 	@rm -rf $(REPORTS_DIR)
 	@echo "✓ Removed $(REPORTS_DIR)/"
 	@echo ""
+
+# Install dependencies
+setup:
+	@echo "Installing Python dependencies..."
+	@pip install -r requirements.txt
+	@echo ""
+	@command -v pandoc >/dev/null 2>&1 \
+		&& echo "pandoc: $$(pandoc --version | head -1)" \
+		|| { echo "Warning: pandoc is not installed (needed for HTML reports)"; \
+		     echo "  Install: https://pandoc.org/installing.html"; }
+	@echo ""
+	@echo "Setup complete."
+
+# Archive input/ and imports/ (keeps last 3 backups)
+archive:
+	@bash scripts/archive.sh
 
 # Display report structure
 status:

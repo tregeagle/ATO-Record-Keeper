@@ -10,6 +10,9 @@ imports/
 # Generated reports with personal data
 output/
 
+# Backup archives
+.archive/
+
 # Generated cache/temp files
 .DS_Store
 __pycache__/
