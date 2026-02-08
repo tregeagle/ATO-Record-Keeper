@@ -1,15 +1,28 @@
-		# Trade Tracking & ATO Tax Reporting
 
-One markdown file per trade, FIFO cost basis calculation, ATO-compliant capital gains reports.
+# Intro
+
+Reporting on capital gains when selling shares can be a nightmare. All those boring little DRP and Buy transactions add up over a few decades. 
+
+I tried recording stuff in paper notebooks, spreadsheets and eventually using Sharesight to shortcut the work. I really distrust subscription businesses. I would rather control my own data. Last Friday I used Claude (a subscription. Oh, the irony) to bolt together this thing.
+
+# ATO Record Keeper
+
+Create ATO-compliant capital gains reports with a general record of your progress over time.
+
+ - Imports: Save your contract notes and other evidence
+ - Input/YYYY: Create a simple reference for each transaction
+ - Output: A lifetime overview along with annual reports in markdown and html
 
 ## Quick Start
 
-```bash
-make all                                    # generate all reports
-python scripts/fifo_calculator.py --year 2025   # single year report
-```
+Copy your contract notes, and other evidence to the /import directory.
+use /input/template.md to create simple trade records in YYYY directories.
 
-Reports are output to `output/html/` and `output/markdown/`.
+```bash
+make setup                                  # install requirements
+make all                                    # generate all reports
+```
+Reports are generated in /output
 
 ## Adding a Trade
 
@@ -55,11 +68,3 @@ Reports include:
 - 50% CGT discount for assets held >12 months
 - Net capital gain for ATO label 18A
 - Complete buy/sell transaction list with fees
-
-ATO tax year = 1 Jul to 30 Jun (e.g. `--year 2025` = FY 2024-25).
-
-## Notes
-
-- Buy and sell brokerage fees are included in cost base
-- Dividend income is not tracked (report separately)
-- Pre-2021 trade data is incomplete
